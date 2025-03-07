@@ -121,8 +121,8 @@ module PLCPU(
 	NPC U_NPC(.PC(PC_out), .NPCOp(EX_NPCOp),
 	          .IMM(EX_immout), .aluout(aluout), .stall(stall), .NPC(NPC));
 	EXT U_EXT(
-		.iimm(iimm), .simm(simm), 
-		.uimm(uimm), .EXTOp(EXTOp), .immout(immout)
+		.iimm(iimm), .simm(simm), .bimm(bimm), .uimm(uimm), .jimm(jimm),
+		.EXTOp(EXTOp), .immout(immout)
 	);
 	RF U_RF(
 		.clk(clk), .rst(reset),

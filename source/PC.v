@@ -1,4 +1,4 @@
-module PC( clk, rst, NPC, PC );
+module PC( clk, rst, NPC, PC, stall );
   input              clk;
   input              rst;
   input              stall;

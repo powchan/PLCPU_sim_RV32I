@@ -1,6 +1,6 @@
 `include "ctrl_encode_def.v"
 
-module NPC(PC, NPCOp, IMM, aluout, NPC);  // next pc module
+module NPC(PC, NPCOp, IMM, aluout, NPC, stall);  // next pc module
    input  [31:0] PC;        // pc
    input  [4:0]  NPCOp;     // next pc operation
    input  [31:0] IMM;       // immediate
