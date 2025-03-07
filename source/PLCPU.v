@@ -115,7 +115,7 @@ module PLCPU(
  // instantiation of pc unit
 	PC U_PC(.clk(~clk), .rst(reset), .NPC(NPC), .PC(PC_out) );
 	NPC U_NPC(.PC(PC_out), .NPCOp(EX_NPCOp),
-	          .IMM(EX_immout), .NPC(NPC));
+	          .IMM(EX_immout), .aluout(aluout), .NPC(NPC));
 	EXT U_EXT(
 		.iimm(iimm), .simm(simm), 
 		.uimm(uimm), .EXTOp(EXTOp), .immout(immout)
