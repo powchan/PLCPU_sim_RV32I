@@ -10,11 +10,15 @@ module PLCPU(
     output    mem_w,          // output: memory write signal
     output    mem_r           // output: memory read signal
 );
+    wire stall;
+    wire flush;
+    wire [1:0] ForwardA, ForwardB;
     wire        RegWrite;    // control signal to register write
     wire [5:0]  EXTOp;      // control signal to signed extension
     wire [4:0]  ALUOp;       // ALU opertion
     wire [4:0]  NPCOp;       // next PC operation
     wire [1:0]  WDSel;       // (register) write data selection
+    wire        branch_taken; // branch taken signal
    
     wire        ALUSrc;      // ALU source for B
     wire        Zero;        // ALU ouput zero
@@ -110,12 +114,12 @@ module PLCPU(
 	    .Op(Op), .Funct7(Funct7), .Funct3(Funct3), .Zero(Zero), 
 		.RegWrite(RegWrite), .MemWrite(ID_MemWrite), .MemRead(ID_MemRead),
 		.EXTOp(EXTOp), .ALUOp(ALUOp), .NPCOp(NPCOp), 
-		.ALUSrc(ALUSrc), .WDSel(WDSel)
+		.ALUSrc(ALUSrc), .WDSel(WDSel), .branch_taken(branch_taken)
 	);
  // instantiation of pc unit
-	PC U_PC(.clk(~clk), .rst(reset), .NPC(NPC), .PC(PC_out) );
+	PC U_PC(.clk(~clk), .rst(reset), .stall(stall), .NPC(NPC), .PC(PC_out) );
 	NPC U_NPC(.PC(PC_out), .NPCOp(EX_NPCOp),
-	          .IMM(EX_immout), .aluout(aluout), .NPC(NPC));
+	          .IMM(EX_immout), .aluout(aluout), .stall(stall), .NPC(NPC));
 	EXT U_EXT(
 		.iimm(iimm), .simm(simm), 
 		.uimm(uimm), .EXTOp(EXTOp), .immout(immout)
@@ -148,8 +152,17 @@ end
 
     always @(*) 
     begin
-        alu_in1 <= EX_RD1; //from regfile
-        alu_in2 <= EX_RD2; //from regfile
+        case(ForwardA)
+            2'b00: alu_in1 <= EX_RD1; // 正常情况
+            2'b01: alu_in1 <= WB_aluout; // 前递MEM/WB阶段的结果
+            2'b10: alu_in1 <= MEM_aluout; // 前递EX/MEM阶段的结果
+        endcase
+    
+        case(ForwardB)
+            2'b00: alu_in2 <= EX_RD2; // 正常情况
+            2'b01: alu_in2 <= WB_aluout; // 前递MEM/WB阶段的结果
+            2'b10: alu_in2 <= MEM_aluout; // 前递EX/MEM阶段的结果
+        endcase
     end
     
     always @(*) 
@@ -169,7 +182,7 @@ end
     assign instr = IF_ID_out[63:32];
     pl_reg #(.WIDTH(64))
     IF_ID
-    (.clk(~clk), .rst(reset), 
+    (.clk(~clk), .rst(reset | flush), 
     .in(IF_ID_in), .out(IF_ID_out));
 
 
@@ -213,7 +226,7 @@ end
     
     pl_reg #(.WIDTH(194))
     ID_EX
-    (.clk(~clk), .rst(reset), 
+    (.clk(~clk), .rst(reset | flush), 
     .in(ID_EX_in), .out(ID_EX_out));
 
     
@@ -273,5 +286,28 @@ end
     MEM_WB
     (.clk(~clk), .rst(reset), 
     .in(MEM_WB_in), .out(MEM_WB_out));
+
+    Hazard_Detect U_Hazard_Detect(
+    .ID_EX_rs1(EX_rs1),
+    .ID_EX_rs2(EX_rs2),
+    .EX_MEM_rd(MEM_rd),
+    .MEM_WB_rd(WB_rd),
+    .EX_MEM_RegWrite(MEM_RegWrite),
+    .MEM_WB_RegWrite(WB_RegWrite),
+    .branch_taken(branch_taken),
+    .stall(stall),
+    .flush(flush)
+);
+
+Forwarding U_Forwarding(
+    .ID_EX_rs1(EX_rs1),
+    .ID_EX_rs2(EX_rs2),
+    .EX_MEM_rd(MEM_rd),
+    .MEM_WB_rd(WB_rd),
+    .EX_MEM_RegWrite(MEM_RegWrite),
+    .MEM_WB_RegWrite(WB_RegWrite),
+    .ForwardA(ForwardA),
+    .ForwardB(ForwardB)
+);
 
 endmodule
