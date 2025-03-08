@@ -8,6 +8,13 @@ Top level modules:
 } {} {}} D:/codtest/demo/plcpu_sim/project/ctrl_encode_def.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/ctrl_encode_def.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 
+} {} {}} D:/codtest/demo/plcpu_sim/project/pl_reg.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/pl_reg.v
+Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
+-- Compiling module pl_reg
+
+Top level modules:
+	pl_reg
+
 } {} {}} D:/codtest/demo/plcpu_sim/project/NPC.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/NPC.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module NPC
@@ -21,13 +28,6 @@ Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 
 Top level modules:
 	EXT
-
-} {} {}} D:/codtest/demo/plcpu_sim/project/pl_reg.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/pl_reg.v
-Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
--- Compiling module pl_reg
-
-Top level modules:
-	pl_reg
 
 } {} {}} D:/codtest/demo/plcpu_sim/project/alu.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/alu.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016

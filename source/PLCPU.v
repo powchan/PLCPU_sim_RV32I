@@ -190,7 +190,7 @@ end
     end
     pl_reg #(.WIDTH(64))
     IF_ID
-    (.clk(~clk), .rst(reset | flush), 
+    (.clk(~clk), .rst(reset), .flush(flush), 
     .in(IF_ID_in), .out(IF_ID_out));
 
     always @(*) begin
@@ -236,7 +236,7 @@ end
     //assign EX_inst = ID_EX_out[193:162];
     pl_reg #(.WIDTH(194))
     ID_EX
-    (.clk(~clk), .rst(reset | flush), 
+    (.clk(~clk), .rst(reset), .flush(flush),  
     .in(ID_EX_in), .out(ID_EX_out));
     always @(*) begin
       $write("ID_EX_out:%h", ID_EX_out);
@@ -270,7 +270,7 @@ end
  
     pl_reg #(.WIDTH(146))
     EX_MEM
-    (.clk(~clk), .rst(reset), 
+    (.clk(~clk), .rst(reset), .flush(1'b0), 
     .in(EX_MEM_in), .out(EX_MEM_out));
     
 
@@ -296,7 +296,7 @@ end
 
     pl_reg #(.WIDTH(136))
     MEM_WB
-    (.clk(~clk), .rst(reset), 
+    (.clk(~clk), .rst(reset), .flush(1'b0), 
     .in(MEM_WB_in), .out(MEM_WB_out));
 
 
