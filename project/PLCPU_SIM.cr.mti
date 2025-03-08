@@ -52,13 +52,6 @@ Top level modules:
 	Hazard_Detect
 	Forwarding
 
-} {} {}} D:/codtest/demo/plcpu_sim/project/PLCPU.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/PLCPU.v
-Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
--- Compiling module PLCPU
-
-Top level modules:
-	PLCPU
-
 } {} {}} D:/codtest/demo/plcpu_sim/project/ctrl.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/ctrl.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module ctrl
@@ -86,5 +79,12 @@ Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 
 Top level modules:
 	dm
+
+} {} {}} D:/codtest/demo/plcpu_sim/project/PC.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/PC.v
+Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
+-- Compiling module PC
+
+Top level modules:
+	PC
 
 } {} {}}

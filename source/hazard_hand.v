@@ -58,6 +58,7 @@ always @(*) begin
     else if (MEM_WB_RegWrite && (MEM_WB_rd != 0) && (MEM_WB_rd == ID_EX_rs2)) begin
         ForwardB = 2'b01;
     end
+    $write("ForwardA:%b, ForwardB:%b\n", ForwardA, ForwardB);
 end
 
 endmodule

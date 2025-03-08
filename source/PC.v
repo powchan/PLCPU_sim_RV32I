@@ -10,10 +10,13 @@ module PC( clk, rst, NPC, PC, stall );
        PC <= 32'h0000_0000;
        $write("\n reset pc = %h: ", PC);
        end
-    else if (!stall) begin 
-         PC <= NPC; 
-         $write("\n pc = %h: ", PC);
+    else if (stall) begin  
+         $write("stall PC");
        end
+    else begin
+        PC <= NPC;
+        $write("\n pc = %h: ", PC);
+      end
   end
   
 endmodule
