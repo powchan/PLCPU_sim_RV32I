@@ -156,26 +156,14 @@ end
 begin
     case(ForwardA)
         2'b00: alu_in1 <= EX_RD1; // 正常情况，无需前递
-        2'b01: // 从MEM/WB阶段前递
-            case(WB_WDSel)
-                `WDSel_FromALU: alu_in1 <= WB_aluout; // ALU指令的结果
-                `WDSel_FromMEM: alu_in1 <= WB_MemData; // 加载指令的数据
-                `WDSel_FromPC:  alu_in1 <= WB_pc + 4;  // 跳转指令的PC+4
-                default:        alu_in1 <= 32'b0;      // 默认值（可选）
-            endcase
+        2'b01: alu_in1 <= WD;
         2'b10: alu_in1 <= MEM_aluout; // 从EX/MEM阶段前递，通常为ALU结果
         default: alu_in1 <= 32'b0;    // 默认值（可选）
     endcase
 
     case(ForwardB)
         2'b00: alu_in2 <= EX_RD2; // 正常情况，无需前递
-        2'b01: // 从MEM/WB阶段前递
-            case(WB_WDSel)
-                `WDSel_FromALU: alu_in2 <= WB_aluout; // ALU指令的结果
-                `WDSel_FromMEM: alu_in2 <= WB_MemData; // 加载指令的数据
-                `WDSel_FromPC:  alu_in2 <= WB_pc + 4;  // 跳转指令的PC+4
-                default:        alu_in2 <= 32'b0;      // 默认值（可选）
-            endcase
+        2'b01: alu_in1 <= WD;
         2'b10: alu_in2 <= MEM_aluout; // 从EX/MEM阶段前递，通常为ALU结果
         default: alu_in2 <= 32'b0;    // 默认值（可选）
     endcase
@@ -196,13 +184,17 @@ end
 
     wire [63:0] IF_ID_out;
     assign instr = IF_ID_out[63:32];
+    always @(*) begin
+      $write("IF_ID_in:%h ", IF_ID_in);
+      $write("flush:%b ", flush);
+    end
     pl_reg #(.WIDTH(64))
     IF_ID
-    (.clk(~clk), .rst(reset), 
+    (.clk(~clk), .rst(reset | flush), 
     .in(IF_ID_in), .out(IF_ID_out));
 
     always @(*) begin
-      $write("IF_ID_out:%h", IF_ID_out);
+      $write("IF_ID_out:%h ", IF_ID_out);
     end
 
     //ID_EX
@@ -313,7 +305,7 @@ Hazard_Detect U_Hazard_Detect(
     .ID_EX_rs2(EX_rs2),
     .EX_MEM_rd(MEM_rd),
     .EX_MEM_RegWrite(MEM_RegWrite),
-    .EX_MEM_MemRead(EX_MEM_MemRead), // 确保连接
+    .EX_MEM_MemRead(EX_MemRead), // 确保连接
     .branch_taken(branch_taken),
     .stall(stall),
     .flush(flush)

@@ -12,6 +12,7 @@ module PLCPU(
 );
     wire stall;
     wire flush;
+
     wire [1:0] ForwardA, ForwardB;
     wire        RegWrite;    // control signal to register write
     wire [5:0]  EXTOp;      // control signal to signed extension
@@ -195,24 +196,17 @@ end
 
     wire [63:0] IF_ID_out;
     assign instr = IF_ID_out[63:32];
-    reg rst_IF_ID_reg;
-always @(*) begin
-    // 当 flush 明确为1时，复位信号为1，否则使用 reset 的值
-    if (flush === 1'b1)
-        rst_IF_ID_reg = 1'b1;
-    else
-        rst_IF_ID_reg = reset;
-end
-
-wire rst_IF_ID = rst_IF_ID_reg;
-
-pl_reg #(.WIDTH(64))
+    always @(*) begin
+      $write("IF_ID_in:%h ", IF_ID_in);
+      $write("flush:%b ", flush);
+    end
+    pl_reg #(.WIDTH(64))
     IF_ID
-    (.clk(~clk), .rst(rst_IF_ID), 
+    (.clk(~clk), .rst(reset | flush), 
     .in(IF_ID_in), .out(IF_ID_out));
 
     always @(*) begin
-      $write("IF_ID_out:%h", IF_ID_out);
+      $write("IF_ID_out:%h ", IF_ID_out);
     end
 
     //ID_EX
