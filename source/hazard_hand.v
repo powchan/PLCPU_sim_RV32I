@@ -1,36 +1,25 @@
-// Hazard Detection Unit
 module Hazard_Detect(
-    input [4:0] ID_EX_rs1,
-    input [4:0] ID_EX_rs2,
+    input [4:0] ID_EX_rs1, ID_EX_rs2,
     input [4:0] EX_MEM_rd,
-    input [4:0] MEM_WB_rd,
     input EX_MEM_RegWrite,
-    input MEM_WB_RegWrite,
-    input branch_taken,  // 新增：分支指令是否跳转
+    input EX_MEM_MemRead, // 新增：检测 Load 指令
+    input branch_taken,
     output reg stall,
-    output reg flush     // 新增：流水线刷新信号
+    output reg flush
 );
-
 always @(*) begin
-    // 数据冒险检测（覆盖EX和MEM阶段）
-    if ((EX_MEM_RegWrite && (EX_MEM_rd != 0) && 
-         ((EX_MEM_rd == ID_EX_rs1) || (EX_MEM_rd == ID_EX_rs2))) ||
-        (MEM_WB_RegWrite && (MEM_WB_rd != 0) && 
-         ((MEM_WB_rd == ID_EX_rs1) || (MEM_WB_rd == ID_EX_rs2)))) begin
+    stall = 1'b0;
+    flush = 1'b0;
+    // Load-Use 冒险
+    if (EX_MEM_MemRead && EX_MEM_RegWrite && (EX_MEM_rd != 0) &&
+        ((EX_MEM_rd == ID_EX_rs1) || (EX_MEM_rd == ID_EX_rs2))) begin
         stall = 1'b1;
-        flush = 1'b0;
     end
-    // 控制冒险检测保持不变
+    // 控制冒险
     else if (branch_taken) begin
-        stall = 1'b0;
         flush = 1'b1;
     end
-    else begin
-        stall = 1'b0;
-        flush = 1'b0;
-    end
 end
-
 endmodule
 
 module Forwarding(

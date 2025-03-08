@@ -101,6 +101,8 @@ module ctrl(Op, Funct7, Funct3, Zero,
 // NPC_BRANCH     5'b00001
 // NPC_JUMP       5'b00010
 // NPC_JALR       5'b00100
+    assign NPCOp[4] = 0;
+    assign NPCOp[3] = 0;
     assign NPCOp[2] = i_jalr;
     assign NPCOp[1] = i_jal;
     assign NPCOp[0] = sbtype & Zero;

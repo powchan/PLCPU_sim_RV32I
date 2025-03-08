@@ -287,13 +287,13 @@ end
     (.clk(~clk), .rst(reset), 
     .in(MEM_WB_in), .out(MEM_WB_out));
 
-    Hazard_Detect U_Hazard_Detect(
+
+Hazard_Detect U_Hazard_Detect(
     .ID_EX_rs1(EX_rs1),
     .ID_EX_rs2(EX_rs2),
     .EX_MEM_rd(MEM_rd),
-    .MEM_WB_rd(WB_rd),
     .EX_MEM_RegWrite(MEM_RegWrite),
-    .MEM_WB_RegWrite(WB_RegWrite),
+    .EX_MEM_MemRead(EX_MEM_MemRead), // 确保连接
     .branch_taken(branch_taken),
     .stall(stall),
     .flush(flush)
