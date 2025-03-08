@@ -185,6 +185,9 @@ end
     (.clk(~clk), .rst(reset | flush), 
     .in(IF_ID_in), .out(IF_ID_out));
 
+    always @(*) begin
+      $display("IF_ID_out:%h", IF_ID_out);
+    end
 
     //ID_EX
     wire [193:0] ID_EX_in;
@@ -223,12 +226,13 @@ end
     assign EX_MemRead = ID_EX_out[161];
     assign EX_pc = ID_EX_out[31:0];
     //assign EX_inst = ID_EX_out[193:162];
-    
     pl_reg #(.WIDTH(194))
     ID_EX
     (.clk(~clk), .rst(reset | flush), 
     .in(ID_EX_in), .out(ID_EX_out));
-
+    always @(*) begin
+      $display("ID_EX_out:%h", ID_EX_out);
+    end
     
     //EX_MEM
     wire [145:0] EX_MEM_in;

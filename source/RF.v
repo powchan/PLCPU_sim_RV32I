@@ -22,7 +22,7 @@ module RF(     input         clk,
       if (RFWr) begin
         if(A3 != 5'b0)begin
             rf[A3] <= WD;
-            //$write("x%d = %h  ", A3, WD);
+            $write("x%d = %h  ", A3, WD);
 	      end
       end
   end

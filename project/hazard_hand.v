@@ -19,6 +19,7 @@ always @(*) begin
     else if (branch_taken) begin
         flush = 1'b1;
     end
+    $display("stall:%b, flush:%b", stall, flush);
 end
 endmodule
 
