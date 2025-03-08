@@ -68,15 +68,6 @@ module ctrl(Op, Funct7, Funct3, Zero,
     wire i_bge = sbtype&Funct3[2]&~Funct3[1]&Funct3[0]; 
     wire i_bltu = sbtype&Funct3[2]&Funct3[1]&~Funct3[0]; 
     wire i_bgeu = sbtype&Funct3[2]&Funct3[1]&Funct3[0]; 
-    // 新增分支跳转信号生成逻辑
-  assign branch_taken = (i_beq  & Zero) |  // BEQ且相等
-                      (i_bne  & ~Zero) | // BNE且不等
-                      (i_blt  & Zero) |  // BLT且小于
-                      (i_bge  & Zero) |  // BGE且大于等于
-                      (i_bltu & Zero) |  // BLTU且小于（无符号）
-                      (i_bgeu & Zero) |  // BGEU且大于等于（无符号）
-                      i_jal |            // 无条件跳转
-                      i_jalr;            // 寄存器跳转
      
   
 
@@ -112,7 +103,8 @@ module ctrl(Op, Funct7, Funct3, Zero,
 // NPC_JALR       5'b00100
     assign NPCOp[2] = i_jalr;
     assign NPCOp[1] = i_jal;
-    assign NPCOp[0] = sbtype & branch_taken;
+    assign NPCOp[0] = sbtype & Zero;
+    assign branch_taken = sbtype & Zero;
 
 // ALUOp_nop 5'b00000
 // ALUOp_lui 5'b00001

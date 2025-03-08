@@ -12,16 +12,18 @@ module Hazard_Detect(
 );
 
 always @(*) begin
-    // 数据冒险检测
-    if (EX_MEM_RegWrite && 
-        ((EX_MEM_rd == ID_EX_rs1) || (EX_MEM_rd == ID_EX_rs2))) begin
+    // 数据冒险检测（覆盖EX和MEM阶段）
+    if ((EX_MEM_RegWrite && (EX_MEM_rd != 0) && 
+         ((EX_MEM_rd == ID_EX_rs1) || (EX_MEM_rd == ID_EX_rs2))) ||
+        (MEM_WB_RegWrite && (MEM_WB_rd != 0) && 
+         ((MEM_WB_rd == ID_EX_rs1) || (MEM_WB_rd == ID_EX_rs2)))) begin
         stall = 1'b1;
         flush = 1'b0;
     end
-    // 控制冒险检测
+    // 控制冒险检测保持不变
     else if (branch_taken) begin
         stall = 1'b0;
-        flush = 1'b1;  // 刷新错误取指的指令
+        flush = 1'b1;
     end
     else begin
         stall = 1'b0;
@@ -31,39 +33,40 @@ end
 
 endmodule
 
-// Forwarding Unit
 module Forwarding(
-    input [4:0] ID_EX_rs1,    // ID阶段的rs1
-    input [4:0] ID_EX_rs2,    // ID阶段的rs2
+    input [4:0] ID_EX_rs1,    // ID/EX阶段的rs1
+    input [4:0] ID_EX_rs2,    // ID/EX阶段的rs2
     input [4:0] EX_MEM_rd,    // EX/MEM阶段的rd
     input [4:0] MEM_WB_rd,    // MEM/WB阶段的rd
-    input EX_MEM_RegWrite,    // EX/MEM阶段的RegWrite信号
-    input MEM_WB_RegWrite,    // MEM/WB阶段的RegWrite信号
-    output reg [1:0] ForwardA, // 前递选择信号A
-    output reg [1:0] ForwardB  // 前递选择信号B
+    input EX_MEM_RegWrite,    // EX/MEM阶段的寄存器写使能
+    input MEM_WB_RegWrite,    // MEM/WB阶段的寄存器写使能
+    output reg [1:0] ForwardA, // ALU输入A的前递选择
+    output reg [1:0] ForwardB  // ALU输入B的前递选择
 );
 
+// ForwardA控制逻辑
 always @(*) begin
-    // ForwardA逻辑
+    ForwardA = 2'b00; // 默认值：无前递
+    
+    // 优先级1：EX/MEM阶段前递（最近的计算结果）
     if (EX_MEM_RegWrite && (EX_MEM_rd != 0) && (EX_MEM_rd == ID_EX_rs1)) begin
-        ForwardA = 2'b10; // 前递EX/MEM阶段的结果
-    end
+        ForwardA = 2'b10; // 选择EX/MEM阶段的ALU结果
+    end 
+    // 优先级2：MEM/WB阶段前递（较早的结果）
     else if (MEM_WB_RegWrite && (MEM_WB_rd != 0) && (MEM_WB_rd == ID_EX_rs1)) begin
-        ForwardA = 2'b01; // 前递MEM/WB阶段的结果
+        ForwardA = 2'b01; // 选择MEM/WB阶段的写回数据
     end
-    else begin
-        ForwardA = 2'b00; // 不进行前递
-    end
+end
 
-    // ForwardB逻辑
+// ForwardB控制逻辑（与ForwardA对称）
+always @(*) begin
+    ForwardB = 2'b00; // 默认值：无前递
+    
     if (EX_MEM_RegWrite && (EX_MEM_rd != 0) && (EX_MEM_rd == ID_EX_rs2)) begin
-        ForwardB = 2'b10; // 前递EX/MEM阶段的结果
-    end
+        ForwardB = 2'b10; 
+    end 
     else if (MEM_WB_RegWrite && (MEM_WB_rd != 0) && (MEM_WB_rd == ID_EX_rs2)) begin
-        ForwardB = 2'b01; // 前递MEM/WB阶段的结果
-    end
-    else begin
-        ForwardB = 2'b00; // 不进行前递
+        ForwardB = 2'b01;
     end
 end
 

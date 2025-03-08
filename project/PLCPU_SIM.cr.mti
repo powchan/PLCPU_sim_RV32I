@@ -8,18 +8,21 @@ Top level modules:
 } {} {}} D:/codtest/demo/plcpu_sim/project/ctrl_encode_def.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/ctrl_encode_def.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 
-} {} {}} D:/codtest/demo/plcpu_sim/project/EXT.v {0 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/EXT.v
+} {} {}} D:/codtest/demo/plcpu_sim/project/EXT.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/EXT.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module EXT
-** Error: D:/codtest/demo/plcpu_sim/project/EXT.v(17): (vlog-2730) Undefined variable: 'bimm'.
-** Error: D:/codtest/demo/plcpu_sim/project/EXT.v(18): (vlog-2730) Undefined variable: 'jimm'.
 
-} {4.0 6.0} {}} D:/codtest/demo/plcpu_sim/project/NPC.v {0 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/NPC.v
+Top level modules:
+	EXT
+
+} {} {}} D:/codtest/demo/plcpu_sim/project/NPC.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/NPC.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module NPC
-** Error: D:/codtest/demo/plcpu_sim/project/NPC.v(8): In, out, or inout does not appear in port list: stall.
 
-} {4.0 5.0} {}} D:/codtest/demo/plcpu_sim/project/pl_reg.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/pl_reg.v
+Top level modules:
+	NPC
+
+} {} {}} D:/codtest/demo/plcpu_sim/project/pl_reg.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/pl_reg.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module pl_reg
 
@@ -49,15 +52,21 @@ Top level modules:
 	Hazard_Detect
 	Forwarding
 
-} {} {}} D:/codtest/demo/plcpu_sim/project/ctrl.v {0 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/ctrl.v
+} {} {}} D:/codtest/demo/plcpu_sim/project/PLCPU.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/PLCPU.v
+Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
+-- Compiling module PLCPU
+
+Top level modules:
+	PLCPU
+
+} {} {}} D:/codtest/demo/plcpu_sim/project/ctrl.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/ctrl.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module ctrl
-** Error: D:/codtest/demo/plcpu_sim/project/ctrl.v(75): (vlog-2730) Undefined variable: 'i_jal'.
-** Error: D:/codtest/demo/plcpu_sim/project/ctrl.v(76): (vlog-2730) Undefined variable: 'i_jalr'.
-** Error (suppressible): D:/codtest/demo/plcpu_sim/project/ctrl.v(79): (vlog-2388) 'i_jal' already declared in this scope (ctrl).
-** Error (suppressible): D:/codtest/demo/plcpu_sim/project/ctrl.v(80): (vlog-2388) 'i_jalr' already declared in this scope (ctrl).
 
-} {4.0 6.0} {}} D:/codtest/demo/plcpu_sim/project/im.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/im.v
+Top level modules:
+	ctrl
+
+} {} {}} D:/codtest/demo/plcpu_sim/project/im.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/im.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module im
 
@@ -78,9 +87,11 @@ Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 Top level modules:
 	dm
 
-} {} {}} D:/codtest/demo/plcpu_sim/project/PC.v {0 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/PC.v
+} {} {}} D:/codtest/demo/plcpu_sim/project/PC.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/PC.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module PC
-** Error: D:/codtest/demo/plcpu_sim/project/PC.v(4): In, out, or inout does not appear in port list: stall.
 
-} {4.0 5.0} {}}
+Top level modules:
+	PC
+
+} {} {}}
