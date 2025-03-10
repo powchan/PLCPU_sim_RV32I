@@ -19,7 +19,6 @@ module PLCPU(
     wire [4:0]  ALUOp;       // ALU opertion
     wire [4:0]  NPCOp;       // next PC operation
     wire [1:0]  WDSel;       // (register) write data selection
-    wire        branch_taken; // branch taken signal
    
     wire        ALUSrc;      // ALU source for B
     wire        Zero;        // ALU ouput zero
@@ -115,7 +114,7 @@ module PLCPU(
 	    .Op(Op), .Funct7(Funct7), .Funct3(Funct3), .Zero(Zero), 
 		.RegWrite(RegWrite), .MemWrite(ID_MemWrite), .MemRead(ID_MemRead),
 		.EXTOp(EXTOp), .ALUOp(ALUOp), .NPCOp(NPCOp), 
-		.ALUSrc(ALUSrc), .WDSel(WDSel), .branch_taken(branch_taken)
+		.ALUSrc(ALUSrc), .WDSel(WDSel)
 	);
  // instantiation of pc unit
 	PC U_PC(.clk(~clk), .rst(reset), .stall(stall), .NPC(NPC), .PC(PC_out) );
@@ -133,8 +132,11 @@ module PLCPU(
 		.RD1(RD1), .RD2(RD2)
 	);
 // instantiation of alu unit
-	alu U_alu(.A(A), .B(B), .ALUOp(EX_ALUOp), .C(aluout), .Zero(Zero));
-	
+	alu U_alu(.A(A), .B(B), .ALUOp(EX_ALUOp), .C(aluout), .Zero(Zero), .flush(flush));
+	always @(*)
+begin
+	$write("flush=%b", flush);
+end
 //please connnect the CPU by yourself
 
 
@@ -184,18 +186,18 @@ end
 
     wire [63:0] IF_ID_out;
     assign instr = IF_ID_out[63:32];
-    always @(*) begin
-      $write("IF_ID_in:%h ", IF_ID_in);
-      $write("flush:%b ", flush);
-    end
+    // always @(*) begin
+    //   $write("IF_ID_in:%h ", IF_ID_in);
+    //   $write("flush:%b ", flush);
+    // end
     pl_reg #(.WIDTH(64))
     IF_ID
     (.clk(~clk), .rst(reset), .flush(flush), 
     .in(IF_ID_in), .out(IF_ID_out));
 
-    always @(*) begin
-      $write("IF_ID_out:%h ", IF_ID_out);
-    end
+    // always @(*) begin
+    //   $write("IF_ID_out:%h ", IF_ID_out);
+    // end
 
     //ID_EX
     wire [193:0] ID_EX_in;
@@ -238,9 +240,9 @@ end
     ID_EX
     (.clk(~clk), .rst(reset), .flush(flush),  
     .in(ID_EX_in), .out(ID_EX_out));
-    always @(*) begin
-      $write("ID_EX_out:%h", ID_EX_out);
-    end
+    // always @(*) begin
+    //   $write("ID_EX_out:%h", ID_EX_out);
+    // end
     
     //EX_MEM
     wire [145:0] EX_MEM_in;
@@ -306,9 +308,7 @@ Hazard_Detect U_Hazard_Detect(
     .EX_MEM_rd(MEM_rd),
     .EX_MEM_RegWrite(MEM_RegWrite),
     .EX_MEM_MemRead(EX_MemRead), // 确保连接
-    .branch_taken(branch_taken),
-    .stall(stall),
-    .flush(flush)
+    .stall(stall)
 );
 
 Forwarding U_Forwarding(

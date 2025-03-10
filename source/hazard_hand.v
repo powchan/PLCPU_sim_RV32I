@@ -3,23 +3,15 @@ module Hazard_Detect(
     input [4:0] EX_MEM_rd,
     input EX_MEM_RegWrite,
     input EX_MEM_MemRead, // 新增：检测 Load 指令
-    input branch_taken,
-    output reg stall,
-    output reg flush
+    output reg stall
 );
 always @(*) begin
     stall = 1'b0;
-    flush = 1'b0;
     // Load-Use 冒险
     if (EX_MEM_MemRead && EX_MEM_RegWrite && (EX_MEM_rd != 0) &&
         ((EX_MEM_rd == ID_EX_rs1) || (EX_MEM_rd == ID_EX_rs2))) begin
         stall = 1'b1;
     end
-    // 控制冒险
-    else if (branch_taken) begin
-        flush = 1'b1;
-    end
-    $display("stall:%b, flush:%b", stall, flush);
 end
 endmodule
 
@@ -58,7 +50,7 @@ always @(*) begin
     else if (MEM_WB_RegWrite && (MEM_WB_rd != 0) && (MEM_WB_rd == ID_EX_rs2)) begin
         ForwardB = 2'b01;
     end
-    $write("ForwardA:%b, ForwardB:%b\n", ForwardA, ForwardB);
+    // $write("ForwardA:%b, ForwardB:%b\n", ForwardA, ForwardB);
 end
 
 endmodule

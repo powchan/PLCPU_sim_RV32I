@@ -3,7 +3,7 @@
 module ctrl(Op, Funct7, Funct3, Zero, 
             RegWrite, MemWrite, MemRead,
             EXTOp, ALUOp, NPCOp, 
-            ALUSrc, WDSel, branch_taken
+            ALUSrc, WDSel
             );
             
    input  [6:0] Op;       // opcode
@@ -19,7 +19,6 @@ module ctrl(Op, Funct7, Funct3, Zero,
    output [4:0] NPCOp;    // next pc operation
    output       ALUSrc;   // ALU source for B
    output [1:0] WDSel;    // (register) write data selection
-   output branch_taken;
    
    //LUI
    wire LUI = ~Op[6]&Op[5]&Op[4]&~Op[3]&Op[2]&Op[1]&Op[0];
@@ -106,8 +105,6 @@ module ctrl(Op, Funct7, Funct3, Zero,
     assign NPCOp[2] = i_jalr;
     assign NPCOp[1] = i_jal;
     assign NPCOp[0] = sbtype & Zero;
-    assign branch_taken = sbtype & Zero;
-
 // ALUOp_nop 5'b00000
 // ALUOp_lui 5'b00001
 // ALUOp_add 5'b00011
@@ -118,7 +115,7 @@ module ctrl(Op, Funct7, Funct3, Zero,
 // ALUOp_sll 5'b01111
 // ALUOp_srl 5'b10000
 // ALUOp_sra 5'b10001
-    assign ALUOp[4] = i_srl | i_sra | i_srli | i_srai;
+    assign ALUOp[4] = i_srl | i_sra | i_srli | i_srai | i_beq;
     assign ALUOp[3] = i_and | i_andi | i_or | i_ori | i_sll| i_slli | i_xor | i_xori | i_slt | i_sltu | i_slti | i_sltui | i_bltu | i_bgeu;
     assign ALUOp[2] = i_and | i_andi| i_or | i_ori | i_sub | i_beq | i_sll | i_slli | i_xor | i_xori | i_beq | i_bne | i_blt | i_bge;
     assign ALUOp[1] = i_addi | i_add | i_and | i_andi | i_sll | i_slli | itype_l | stype | i_slt | i_sltu | i_slti | i_sltui | i_jalr | i_blt | i_bge;

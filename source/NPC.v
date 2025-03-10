@@ -17,9 +17,9 @@ module NPC(PC, NPCOp, IMM, aluout, NPC, stall);  // next pc module
         end
         case (NPCOp)
             `NPC_PLUS4:  NPC = PCPLUS4;
-            `NPC_BRANCH: NPC = PC+IMM;    //B type, NPC computes addr
-            `NPC_JUMP:   NPC = PC+IMM;    //J type, NPC computes 
-            `NPC_JALR:   NPC = aluout;
+            `NPC_BRANCH: NPC = PC+IMM-8;    //B type, NPC computes addr
+            `NPC_JUMP:   NPC = PC+IMM-8;    //J type, NPC computes 
+            `NPC_JALR:   NPC = aluout-8;
             default:     NPC = PCPLUS4;
         endcase
     end // end always
