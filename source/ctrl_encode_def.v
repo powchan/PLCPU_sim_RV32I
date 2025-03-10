@@ -46,6 +46,7 @@
 `define ALUOp_srl 5'b10000
 `define ALUOp_sra 5'b10001
 `define ALUOp_beq 5'b10100
+`define ALUOp_j 5'b11000
 
 `define dm_word 3'b000
 `define dm_halfword 3'b001

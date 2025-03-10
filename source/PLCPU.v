@@ -165,7 +165,7 @@ begin
 
     case(ForwardB)
         2'b00: alu_in2 <= EX_RD2; // 正常情况，无需前递
-        2'b01: alu_in1 <= WD;
+        2'b01: alu_in2 <= WD;
         2'b10: alu_in2 <= MEM_aluout; // 从EX/MEM阶段前递，通常为ALU结果
         default: alu_in2 <= 32'b0;    // 默认值（可选）
     endcase
@@ -236,6 +236,9 @@ end
     assign EX_MemRead = ID_EX_out[161];
     assign EX_pc = ID_EX_out[31:0];
     //assign EX_inst = ID_EX_out[193:162];
+    always @(*) begin
+      $write(" EX_ALUOp:%b, EX_NPCOp:%b, EX_ALUSrc:%b, EX_pc:%h ", EX_ALUOp, EX_NPCOp, EX_ALUSrc, EX_WDSel, EX_pc);
+    end
     pl_reg #(.WIDTH(194))
     ID_EX
     (.clk(~clk), .rst(reset), .flush(flush),  
@@ -307,7 +310,7 @@ Hazard_Detect U_Hazard_Detect(
     .ID_EX_rs2(EX_rs2),
     .EX_MEM_rd(MEM_rd),
     .EX_MEM_RegWrite(MEM_RegWrite),
-    .EX_MEM_MemRead(EX_MemRead), // 确保连接
+    .EX_MEM_MemRead(MEM_MemRead), // 确保连接
     .stall(stall)
 );
 

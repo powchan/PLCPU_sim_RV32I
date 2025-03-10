@@ -13,24 +13,25 @@ module alu(A, B, ALUOp, C, Zero, flush);
    initial flush = 1'b0;
    always @( * ) begin
       case ( ALUOp )
-        `ALUOp_lui:C=B;
-        `ALUOp_add:C=A+B;
-        `ALUOp_sub:C=A-B;  //and beq
-        `ALUOp_xor:C=A^B;
-        `ALUOp_or:C=A|B;
-        `ALUOp_and:C=A&B;
-        `ALUOp_sll:C=A<<B;
-        `ALUOp_srl:C=A>>B;
-        `ALUOp_sra:C=A>>>B;
-        `ALUOp_slt:C=($signed(A) < $signed(B)) ? 32'b1 : 32'b0;
-        `ALUOp_sltu:C=($unsigned(A) < $unsigned(B)) ? 32'b1 : 32'b0;
-      `ALUOp_beq: begin C={28'h0000000,3'b000,(A!=B)}; flush=(A==B); end
-      `ALUOp_bne: begin C={28'h0000000,3'b000,(A==B)}; flush=(A!=B); end
-      `ALUOp_blt: begin C={28'h0000000,3'b000,(A>=B)}; flush=(A<B); end
-      `ALUOp_bge: begin C={28'h0000000,3'b000,(A<B)}; flush=(A>=B); end
-      `ALUOp_bltu: begin C={28'h0000000,3'b000,($unsigned(A)>=$unsigned(B))}; flush=($unsigned(A)<$unsigned(B)); end
-      `ALUOp_bgeu: begin C={28'h0000000,3'b000,($unsigned(A)<$unsigned(B))}; flush=($unsigned(A)>=$unsigned(B)); end
-        default: C=A;
+        `ALUOp_lui: begin C = B; flush = 1'b0; end
+        `ALUOp_add: begin C = A + B; flush = 1'b0; end
+        `ALUOp_sub: begin C = A - B; flush = 1'b0; end  //and beq
+        `ALUOp_xor: begin C = A ^ B; flush = 1'b0; end
+        `ALUOp_or: begin C = A | B; flush = 1'b0; end
+        `ALUOp_and: begin C = A & B; flush = 1'b0; end
+        `ALUOp_sll: begin C = A << B; flush = 1'b0; end
+        `ALUOp_srl: begin C = A >> B; flush = 1'b0; end
+        `ALUOp_sra: begin C = A >>> B; flush = 1'b0; end
+        `ALUOp_slt: begin C = ($signed(A) < $signed(B)) ? 32'b1 : 32'b0; flush = 1'b0; end
+        `ALUOp_sltu: begin C = ($unsigned(A) < $unsigned(B)) ? 32'b1 : 32'b0; flush = 1'b0; end
+        `ALUOp_beq: begin C = {28'h0000000, 3'b000, (A != B)}; flush = (A == B); end
+        `ALUOp_bne: begin C = {28'h0000000, 3'b000, (A == B)}; flush = (A != B); end
+        `ALUOp_blt: begin C = {28'h0000000, 3'b000, (A >= B)}; flush = (A < B); end
+        `ALUOp_bge: begin C = {28'h0000000, 3'b000, (A < B)}; flush = (A >= B); end
+        `ALUOp_bltu: begin C = {28'h0000000, 3'b000, ($unsigned(A) >= $unsigned(B))}; flush = ($unsigned(A) < $unsigned(B)); end
+        `ALUOp_bgeu: begin C = {28'h0000000, 3'b000, ($unsigned(A) < $unsigned(B))}; flush = ($unsigned(A) > $unsigned(B)); end
+        `ALUOp_j: begin C = A; flush = 1'b1; end
+        default: begin C = A; flush = 1'b0; end
       endcase
    end 
    

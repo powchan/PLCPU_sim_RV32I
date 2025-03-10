@@ -8,14 +8,11 @@ module PC( clk, rst, NPC, PC, stall );
   always @(posedge clk, posedge rst) begin
     if (rst) begin
        PC <= 32'h0000_0000;
-       $write("\n reset pc = %h: ", PC);
        end
     else if (stall) begin  
-         $write("stall PC");
        end
     else begin
         PC <= NPC;
-        $write("\n pc = %h: ", PC);
       end
   end
   
