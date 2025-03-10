@@ -19,9 +19,10 @@ module NPC(PC, NPCOp, IMM, aluout, NPC, stall);  // next pc module
             `NPC_PLUS4:  NPC = PCPLUS4;
             `NPC_BRANCH: NPC = PC+IMM-8;    //B type, NPC computes addr
             `NPC_JUMP:   NPC = PC+IMM-8;    //J type, NPC computes 
-            `NPC_JALR:   NPC = aluout-8;
+            `NPC_JALR:   NPC = aluout;
             default:     NPC = PCPLUS4;
         endcase
+        $write("NPC:%h", NPC);
     end // end always
    
 endmodule

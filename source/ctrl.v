@@ -11,7 +11,7 @@ module ctrl(Op, Funct7, Funct3, Zero,
    input  [2:0] Funct3;    // funct3
    input        Zero;
    
-   output       RegWrite; // control signal for register write
+   output       RegWrite; // control signal for register  
    output       MemWrite; // control signal for memory write
    output       MemRead;  // control signal for memory read
    output [5:0] EXTOp;    // control signal to signed extension
@@ -104,7 +104,7 @@ module ctrl(Op, Funct7, Funct3, Zero,
     assign NPCOp[3] = 0;
     assign NPCOp[2] = i_jalr;
     assign NPCOp[1] = i_jal;
-    assign NPCOp[0] = sbtype & Zero;
+    assign NPCOp[0] = sbtype;
 // ALUOp_nop 5'b00000
 // ALUOp_lui 5'b00001
 // ALUOp_add 5'b00011
@@ -120,7 +120,7 @@ module ctrl(Op, Funct7, Funct3, Zero,
     assign ALUOp[2] = i_and | i_andi| i_or | i_ori | i_sub | i_beq | i_sll | i_slli | i_xor | i_xori | i_beq | i_bne | i_blt | i_bge;
     assign ALUOp[1] = i_addi | i_add | i_and | i_andi | i_sll | i_slli | itype_l | stype | i_slt | i_sltu | i_slti | i_sltui | i_jalr | i_blt | i_bge;
 	  assign ALUOp[0] = i_addi | i_add | i_or | i_ori | LUI | i_sll | i_slli | i_sra | i_srai | itype_l | stype | i_sltu | i_sltui | i_jalr | i_bne | i_bge | i_bgeu;
-    always @(*) begin
-      $display("ctrl:ALUOp: %b, i_ori=%b\n", ALUOp, i_ori);
-    end
+    // always @(*) begin
+      // $display("ctrl:ALUOp: %b, i_ori=%b\n", ALUOp, i_ori);
+    // end
 endmodule

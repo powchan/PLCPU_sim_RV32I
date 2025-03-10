@@ -30,7 +30,8 @@ module alu(A, B, ALUOp, C, Zero, flush);
         `ALUOp_bge: begin C = {28'h0000000, 3'b000, (A < B)}; flush = (A >= B); end
         `ALUOp_bltu: begin C = {28'h0000000, 3'b000, ($unsigned(A) >= $unsigned(B))}; flush = ($unsigned(A) < $unsigned(B)); end
         `ALUOp_bgeu: begin C = {28'h0000000, 3'b000, ($unsigned(A) < $unsigned(B))}; flush = ($unsigned(A) > $unsigned(B)); end
-        `ALUOp_j: begin C = A; flush = 1'b1; end
+        `ALUOp_jal: begin C = A; flush = 1'b1; end
+         `ALUOp_jalr: begin C = A + B; flush = 1'b1; end
         default: begin C = A; flush = 1'b0; end
       endcase
    end 
