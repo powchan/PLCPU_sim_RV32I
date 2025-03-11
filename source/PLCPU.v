@@ -169,6 +169,7 @@ begin
         2'b10: alu_in2 <= MEM_aluout; // 从EX/MEM阶段前递，通常为ALU结果
         default: alu_in2 <= 32'b0;    // 默认值（可选）
     endcase
+    // $write("alu_in1:%h, alu_in2:%h; ForwardAB=%b %b ", alu_in1, alu_in2, ForwardA, ForwardB);
 end
     
     always @(*) 
@@ -238,7 +239,9 @@ end
     //assign EX_inst = ID_EX_out[193:162];
     always @(*) begin
       $write(" EX_ALUOp:%b, EX_NPCOp:%b, EX_ALUSrc:%b, EX_pc:%h ", EX_ALUOp, EX_NPCOp, EX_ALUSrc, EX_WDSel, EX_pc);
+      $write(" aluout:%h", aluout);
     end
+
     pl_reg #(.WIDTH(194))
     ID_EX
     (.clk(~clk), .rst(reset), .flush(flush),  .stall(stall),

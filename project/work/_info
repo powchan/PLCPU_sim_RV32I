@@ -15,16 +15,16 @@ n@_opt
 Z4 OL;O;10.5;63
 R0
 T_opt1
-!s110 1741675656
-VD[VQYgV:?zW`JJ=X8Cfgg0
+!s110 1741681250
+VfWzMkAAN7TdM6R>7;]b[<3
 R1
-=4-bceca009db9c-67cfdc88-14c-6f34
+=5-bceca009db9c-67cff262-108-70dc
 R2
 R3
 n@_opt1
 R4
 valu
-!s110 1741675641
+!s110 1741680703
 !i10b 1
 !s100 I<FYGkz:kghJV^2o]ThSL2
 Io3W@3KTQO6a0X2gB5`BHk3
@@ -38,14 +38,14 @@ Z7 OL;L;10.5;63
 r1
 !s85 0
 31
-Z8 !s108 1741675641.000000
+!s108 1741680703.000000
 !s107 ctrl_encode_def.v|D:/codtest/demo/plcpu_sim/project/alu.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/alu.v|
 !i113 0
-Z9 o-work work -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+Z8 o-work work -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
 R3
 vctrl
-Z10 !s110 1741675642
+!s110 1741676525
 !i10b 1
 !s100 _KQIeBk<mc<IR`o5JQE3C1
 I41dC3A<4deW=8F8NUl01=0
@@ -59,14 +59,14 @@ R7
 r1
 !s85 0
 31
-R8
+!s108 1741676525.000000
 !s107 ctrl_encode_def.v|D:/codtest/demo/plcpu_sim/project/ctrl.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/ctrl.v|
 !i113 0
-R9
+R8
 R3
 vdm
-R10
+Z9 !s110 1741676526
 !i10b 1
 !s100 fPO8gR:8a4;Q>JC@hlM5V1
 I5UVE;93:ko3RD0YTf1T[B1
@@ -80,14 +80,14 @@ R7
 r1
 !s85 0
 31
-Z11 !s108 1741675642.000000
+Z10 !s108 1741676526.000000
 !s107 ctrl_encode_def.v|D:/codtest/demo/plcpu_sim/project/dm.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/dm.v|
 !i113 0
-R9
+R8
 R3
 vEXT
-Z12 !s110 1741675643
+R9
 !i10b 1
 !s100 1`h_h?IK1?Ol:hm2Sk@A52
 Im0Eo]0kB;T<@K=dP?FgY:1
@@ -101,59 +101,59 @@ R7
 r1
 !s85 0
 31
-R11
+R10
 !s107 ctrl_encode_def.v|D:/codtest/demo/plcpu_sim/project/EXT.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/EXT.v|
 !i113 0
-R9
+R8
 R3
 n@e@x@t
 vForwarding
-Z13 !s110 1741675645
+Z11 !s110 1741676540
 !i10b 1
 !s100 TlaYP@<MjV>f;iZWWWmNA0
 Ik^Gd:[2J>FW8G]bi2kagS0
 R5
 R6
-Z14 w1741536092
-Z15 8D:/codtest/demo/plcpu_sim/project/hazard_hand.v
-Z16 FD:/codtest/demo/plcpu_sim/project/hazard_hand.v
+Z12 w1741536092
+Z13 8D:/codtest/demo/plcpu_sim/project/hazard_hand.v
+Z14 FD:/codtest/demo/plcpu_sim/project/hazard_hand.v
 L0 18
 R7
 r1
 !s85 0
 31
-Z17 !s108 1741675645.000000
-Z18 !s107 D:/codtest/demo/plcpu_sim/project/hazard_hand.v|
-Z19 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/hazard_hand.v|
+Z15 !s108 1741676540.000000
+Z16 !s107 D:/codtest/demo/plcpu_sim/project/hazard_hand.v|
+Z17 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/hazard_hand.v|
 !i113 0
-R9
+R8
 R3
 n@forwarding
 vHazard_Detect
-R13
+R11
 !i10b 1
 !s100 B7GAbCY]>8HNZG@W`8dPT1
 IgHcS`beNX]mHnGa5BH0``3
 R5
 R6
+R12
+R13
 R14
-R15
-R16
 L0 1
 R7
 r1
 !s85 0
 31
+R15
+R16
 R17
-R18
-R19
 !i113 0
-R9
+R8
 R3
 n@hazard_@detect
 vim
-R12
+Z18 !s110 1741676527
 !i10b 1
 !s100 :2znz]:oA79[eSSUa7hQX2
 ILLio]_zXQo`z;mTYk@7^O1
@@ -167,14 +167,14 @@ R7
 r1
 !s85 0
 31
-Z20 !s108 1741675643.000000
+Z19 !s108 1741676527.000000
 !s107 D:/codtest/demo/plcpu_sim/project/im.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/im.v|
 !i113 0
-R9
+R8
 R3
 vNPC
-R12
+R18
 !i10b 1
 !s100 GmQWIOaWlZgPAildCmA^n3
 I;I[4f4QjjM]C2D^FcL8G73
@@ -188,15 +188,15 @@ R7
 r1
 !s85 0
 31
-R20
+R19
 !s107 ctrl_encode_def.v|D:/codtest/demo/plcpu_sim/project/NPC.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/NPC.v|
 !i113 0
-R9
+R8
 R3
 n@n@p@c
 vPC
-R12
+R18
 !i10b 1
 !s100 aGdUlKL0RPK_z42md[BXB3
 I]_l=dXFE]YgPVK[OHQdOY1
@@ -210,15 +210,15 @@ R7
 r1
 !s85 0
 31
-R20
+R19
 !s107 D:/codtest/demo/plcpu_sim/project/PC.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/PC.v|
 !i113 0
-R9
+R8
 R3
 n@p@c
 vpl_reg
-Z21 !s110 1741675644
+Z20 !s110 1741676528
 !i10b 1
 !s100 WGhho=5[XV2N9ZKhRiBPf1
 If:3XMmOCD2E^T>X3IjzJl3
@@ -232,14 +232,14 @@ R7
 r1
 !s85 0
 31
-Z22 !s108 1741675644.000000
+R19
 !s107 D:/codtest/demo/plcpu_sim/project/pl_reg.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/pl_reg.v|
 !i113 0
-R9
+R8
 R3
 vplcomp
-R21
+R20
 !i10b 1
 !s100 iG[Yb_S``KWebL0fmfL[=1
 IQ0ldPd[h7TK=W_h2:o5;H1
@@ -253,14 +253,14 @@ R7
 r1
 !s85 0
 31
-R22
+!s108 1741676528.000000
 !s107 ctrl_encode_def.v|D:/codtest/demo/plcpu_sim/project/plcomp.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/plcomp.v|
 !i113 0
-R9
+R8
 R3
 vplcomp_tb
-R21
+!s110 1741676529
 !i10b 1
 !s100 <P@Go<RFQdKA3eJZ3>EE=2
 I`80<R0J[>i[@k9d4cSBUV1
@@ -274,20 +274,20 @@ R7
 r1
 !s85 0
 31
-R22
+!s108 1741676529.000000
 !s107 D:/codtest/demo/plcpu_sim/project/plcomp_tb.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/plcomp_tb.v|
 !i113 0
-R9
+R8
 R3
 vPLCPU
-R13
+!s110 1741681244
 !i10b 1
-!s100 TBl0>d<a_j5J5KTllY4>J2
-IS4D;Ybf5Il<[c_YPA49J[1
+!s100 ^?<lAk_GNJB7I:fJ20`hf0
+I;d2Pl?QJV6U7;4gAJF<Cz0
 R5
 R6
-w1741675610
+w1741681219
 8D:/codtest/demo/plcpu_sim/project/PLCPU.v
 FD:/codtest/demo/plcpu_sim/project/PLCPU.v
 L0 2
@@ -295,15 +295,15 @@ R7
 r1
 !s85 0
 31
-R17
+!s108 1741681244.000000
 !s107 ctrl_encode_def.v|D:/codtest/demo/plcpu_sim/project/PLCPU.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/PLCPU.v|
 !i113 0
-R9
+R8
 R3
 n@p@l@c@p@u
 vRF
-R13
+!s110 1741676539
 !i10b 1
 !s100 nOe676k`9VfUZ83^UGgVg3
 ImF[<k0L`F>a3hFgOS;czT0
@@ -317,10 +317,10 @@ R7
 r1
 !s85 0
 31
-R17
+!s108 1741676539.000000
 !s107 D:/codtest/demo/plcpu_sim/project/RF.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|D:/codtest/demo/plcpu_sim/project/RF.v|
 !i113 0
-R9
+R8
 R3
 n@r@f
