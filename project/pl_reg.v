@@ -10,8 +10,8 @@ module pl_reg #(parameter WIDTH = 32)(
               out <= 0;
           else if(flush)
               out <= 0;
-          else if (!stall)
-              out <= in;
+          else if (!stall) 
+            out <= in;
       end
     
 endmodule

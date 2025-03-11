@@ -191,14 +191,15 @@ end
     //   $write("IF_ID_in:%h ", IF_ID_in);
     //   $write("flush:%b ", flush);
     // end
+    always @(*) begin
+      $write(" stall%b ", stall);
+    end
     pl_reg #(.WIDTH(64))
     IF_ID
     (.clk(~clk), .rst(reset), .flush(flush), .stall(stall),
     .in(IF_ID_in), .out(IF_ID_out));
 
-    // always @(*) begin
-    //   $write("IF_ID_out:%h ", IF_ID_out);
-    // end
+    
 
     //ID_EX
     wire [193:0] ID_EX_in;
@@ -244,7 +245,7 @@ end
 
     pl_reg #(.WIDTH(194))
     ID_EX
-    (.clk(~clk), .rst(reset), .flush(flush),  .stall(stall),
+    (.clk(~clk), .rst(reset), .flush(flush | stall),  .stall(stall),
     .in(ID_EX_in), .out(ID_EX_out));
     // always @(*) begin
     //   $write("ID_EX_out:%h", ID_EX_out);
@@ -309,11 +310,11 @@ end
 
 
 Hazard_Detect U_Hazard_Detect(
-    .ID_EX_rs1(EX_rs1),
-    .ID_EX_rs2(EX_rs2),
-    .EX_MEM_rd(MEM_rd),
-    .EX_MEM_RegWrite(MEM_RegWrite),
-    .EX_MEM_MemRead(MEM_MemRead), // 确保连接
+    .ID_EX_rs1(rs1),
+    .ID_EX_rs2(rs2),
+    .EX_MEM_rd(EX_rd),
+    .EX_MEM_RegWrite(EX_RegWrite),
+    .EX_MEM_MemRead(EX_MemRead), // 确保连接
     .stall(stall)
 );
 
