@@ -15,6 +15,13 @@ Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 Top level modules:
 	pl_reg
 
+} {} {}} D:/codtest/demo/plcpu_sim/project/NPC.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/NPC.v
+Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
+-- Compiling module NPC
+
+Top level modules:
+	NPC
+
 } {} {}} D:/codtest/demo/plcpu_sim/project/EXT.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/EXT.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 -- Compiling module EXT
@@ -35,13 +42,6 @@ Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
 
 Top level modules:
 	plcomp
-
-} {} {}} D:/codtest/demo/plcpu_sim/project/PLCPU.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/PLCPU.v
-Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
--- Compiling module PLCPU
-
-Top level modules:
-	PLCPU
 
 } {} {}} D:/codtest/demo/plcpu_sim/project/hazard_hand.v {1 {vlog -work work -vopt -stats=none D:/codtest/demo/plcpu_sim/project/hazard_hand.v
 Model Technology ModelSim SE-64 vlog 10.5 Compiler 2016.02 Feb 13 2016
